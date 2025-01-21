@@ -1,0 +1,69 @@
+SELECT `students`.`name` as `student_name`, `students`.`surname` as `student_surname`, `degrees`.*
+FROM `students` 
+JOIN `degrees`
+ON `students`.`degree_id` = `degrees`.`id`
+WHERE `degrees`.`name` LIKE "%Economia"
+
+--------------------------------------------------------------------
+
+SELECT `degrees`.`name` as `degree_name`, `departments`.`name` as `depo_name`, `degrees`.`level`
+FROM `degrees`
+JOIN `departments` 
+??? ON `departments`.`id` = `degrees`.`department_id` ???
+WHERE `departments`.`name` LIKE "%Neuroscienze"
+AND `degrees`.`level` = "magistrale"
+
+--------------------------------------------------------------------
+
+SELECT `courses`.`name` as `course_name`, `courses`.`cfu`, `teachers`.`name` as `teacher_name`, `teachers`.`surname` as `teachers_surname` 
+FROM `courses`
+INNER JOIN `teachers`
+??? ON `courses`.`id` = `teachers`.`id` ???
+WHERE `teachers`.`id` = 44
+
+--------------------------------------------------------------------
+
+SELECT `students`.`name` as `student_name`, `students`.`surname` as `student_surname`, `degrees`.`name` as `degree`, `degrees`.`level` ,`departments`.`name` as `department_name`
+FROM `students`
+INNER JOIN `degrees`
+???????? ON `students`.`degree_id` = `degrees`.`id` ????????
+INNER JOIN `departments`
+???????? ON `degrees`.`department_id` = `departments`.`id` ????????
+ORDER BY `students`.`surname`
+
+--------------------------------------------------------------------
+
+SELECT `courses`.`name` as `course_name`, `courses`.`cfu`, `teachers`.`name` as `teacher_name`, `teachers`.`surname` as `teachers_surname`, `degrees`.`name` as `degree_name`
+FROM `courses`
+INNER JOIN `degrees`
+???????? ON `courses`.`degree_id` = `degrees`.`id` ????????
+INNER JOIN `teachers`
+???????? ON `courses`.`id` = `teachers`.`id` ?????????????
+
+
+--------------------------------------------------------------------
+
+SELECT `teachers`.`name` as `teacher_name`, `teachers`.`surname` as `teacher_surname`, `departments`.`name` as `department_name`
+FROM `teachers`
+JOIN `courses`
+ON `teachers`.`id` = `courses`.`id`
+JOIN `degrees`
+ON `courses`.`degree_id` = `degrees`.`id`
+JOIN `departments` 
+WHERE `departments`.`name` LIKE "%Matematica"
+
+--------------------------------------------------------------------
+
+BONUS:
+
+SELECT COUNT(*) AS `exam_number`, `students`.`name` as `student_name`, `students`.`surname` as `student_surname`
+FROM `students`
+JOIN `exam_student`
+ON `students`.`id` = `exam_student`.`student_id`
+GROUP BY `exam_student`.`student_id`
+
+
+---------------------------------------------------------------------
+
+Domande: 
+Come funziona esattamente ON? Elimina molti risultati oltre i doppioni
