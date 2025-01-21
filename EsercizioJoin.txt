@@ -56,7 +56,7 @@ WHERE `departments`.`name` LIKE "%Matematica"
 
 BONUS:
 
-SELECT COUNT(*) AS `exam_number`, `students`.`name` as `student_name`, `students`.`surname` as `student_surname`
+SELECT COUNT(*) AS `exam_number`, `students`.`name` as `student_name`, `students`.`surname` as `student_surname`, MIN(`exam_student`.`vote`) AS `lower_vote`, (SELECT MAX(`vote`) FROM `exam_student` WHERE `exam_student`.`student_id` = `students`.`id`) AS `max_vote`
 FROM `students`
 JOIN `exam_student`
 ON `students`.`id` = `exam_student`.`student_id`
